@@ -5,7 +5,7 @@ import struct
 import types
 import re
 
-from six import binary_type, iterbytes
+from six import iterbytes
 
 from Xlib.protocol import rq
 from . import DummyDisplay, TestCase
@@ -85,7 +85,7 @@ def _struct_test(name, fields):
                 values_in[field_name] = field_value_in
             if field_value_out is not None:
                 values_out[field_name] = field_value_out
-        if isinstance(field_binary, binary_type):
+        if isinstance(field_binary, bytes):
             binary += field_binary
         elif isinstance(field_binary, (types.FunctionType, types.LambdaType, partial)):
             binary += field_binary(field_value_in)

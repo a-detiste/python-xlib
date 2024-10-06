@@ -26,14 +26,11 @@ additional capability is to match against regular expressions for atoms
 
 '''
 
-# Python 2/3 compatibility.
-from __future__ import print_function
-
 import sys
 import os
 
 # Python 2/3 compatibility.
-from six import PY2, MAXSIZE
+from six import MAXSIZE
 
 # Change path so we find Xlib
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
@@ -41,12 +38,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import re
 from Xlib import display, error
 from optparse import OptionParser
-
-
-if PY2:
-    integer_type = long
-else:
-    integer_type = int
 
 parser = OptionParser()
 parser.add_option("-d","--display",dest="display",help="This option specifies the X server to which to connect",metavar="dpy",default=None)
@@ -90,10 +81,10 @@ if options.name != None:
 
 rangeVals = options.range.split("-")
 if rangeVals[0] != "":
-    low = integer_type(rangeVals[0])
+    low = int(rangeVals[0])
 
 if rangeVals[1] != "":
-    high = integer_type(rangeVals[1])
+    high = int(rangeVals[1])
 else:
     high = MAXSIZE
 

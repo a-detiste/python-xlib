@@ -26,7 +26,7 @@ import struct
 from array import array
 
 # Python 2/3 compatibility.
-from six import PY3, binary_type, byte2int, indexbytes, iterbytes
+from six import byte2int, indexbytes, iterbytes
 
 # Xlib modules
 from .. import X
@@ -36,12 +36,8 @@ from ..support import lock
 def decode_string(bs):
     return bs.decode('latin1')
 
-if PY3:
-    def encode_array(a):
-        return a.tobytes()
-else:
-    def encode_array(a):
-        return a.tostring()
+def encode_array(a):
+    return a.tobytes()
 
 
 class BadDataError(Exception): pass
@@ -676,7 +672,7 @@ class PropertyData(ValueField):
         if fmt not in (8, 16, 32):
             raise BadDataError('Invalid property data format {0}'.format(fmt))
 
-        if isinstance(val, binary_type):
+        if isinstance(val, bytes):
             size = fmt // 8
             vlen = len(val)
             if vlen % size:
