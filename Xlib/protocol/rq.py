@@ -25,8 +25,9 @@ import traceback
 import struct
 from array import array
 
-# Python 2/3 compatibility.
-from six import byte2int, indexbytes, iterbytes
+import operator
+byte2int = operator.itemgetter(0)
+indexbytes = operator.getitem
 
 # Xlib modules
 from .. import X
@@ -452,7 +453,7 @@ class String16(ValueField):
     def pack_value(self, val):
         """Convert 8-byte string into 16-byte list"""
         if isinstance(val, bytes):
-            val = list(iterbytes(val))
+            val = list(iter(val))
 
         slen = len(val)
 

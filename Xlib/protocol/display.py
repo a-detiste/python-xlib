@@ -29,8 +29,9 @@ import socket
 import struct
 import sys
 
-# Python 2/3 compatibility.
-from six import byte2int, indexbytes
+import operator
+byte2int = operator.itemgetter(0)
+indexbytes = operator.getitem
 
 # Xlib modules
 from .. import error

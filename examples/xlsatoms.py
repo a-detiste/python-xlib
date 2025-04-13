@@ -29,9 +29,6 @@ additional capability is to match against regular expressions for atoms
 import sys
 import os
 
-# Python 2/3 compatibility.
-from six import MAXSIZE
-
 # Change path so we find Xlib
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
@@ -86,7 +83,7 @@ if rangeVals[0] != "":
 if rangeVals[1] != "":
     high = int(rangeVals[1])
 else:
-    high = MAXSIZE
+    high = sys.maxsize
 
 if options.match_re != None:
     re_obj = re.compile(options.match_re)
